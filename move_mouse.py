@@ -1,47 +1,53 @@
-from pynput.mouse import Button, Controller
+from pynput.mouse import Controller
 import time
-import random
 from dateutil import parser
 from datetime import datetime
 
 mouse = Controller()
 
+
+def mouse_move(mouse, ran_x, ran_y, *, sleep_time=10):
+    """movement control
+
+    Args:
+        mouse (pynput.mouse.Controller): pynput.mouse.Controller
+        ran_x (list): x axis limitation
+        ran_y (list): y axis limitation
+    """
+    mouse.move(ran_x[n], ran_y[n])
+    mouse.scroll(0, -2)
+    print("Mouse Moving at {}".format(datetime.now()))
+    time.sleep(sleep_time)  # save some energy
+
+
+def time_gap(start_time, end_time):
+    """set a time gap for freezing mouse
+
+    Args:
+        start_time (str): xx:xx time
+        end_time (str): xx:xx time
+
+    Returns:
+        Boolean: True for gap time, False for work time
+    """
+    if datetime.now() >= parser.parse(start_time) and datetime.now() <= parser.parse(
+        end_time
+    ):
+        return True
+    else:
+        return False
+
+
 # Read pointer position
 print("The current pointer position is {0}".format(mouse.position))
-
-# # Set pointer position
-# mouse.position = (10, 20)
-# print('Now we have moved it to {0}'.format(
-#     mouse.position))
-
-# Move pointer relative to current position
-# ran_x = random.randint(-100, 100)
-# ran_y = random.randint(-100, 100)
+# range of mouse movement
 ran_x = [0, 100, 0, -100]
 ran_y = [100, 0, -100, 0]
 n = 0
 while True:
-    # if (
-    #     datetime.now() > parser.parse("9:00") and datetime.now() < parser.parse("11:30")
-    # ) or (
-    #     datetime.now() > parser.parse("11:30")
-    #     and datetime.now() < parser.parse("18:00")
-    # ):
-    if (
-        datetime.now() < parser.parse("11:30")
-    ) or (
-        datetime.now() > parser.parse("12:50")
-    ):    
-        print('OS Mode')
+    if not time_gap("11:30", "12:50"):
         try:
-            # mouse.press(Button.left)
-            # mouse.release(Button.left)
-            mouse.move(ran_x[n], ran_y[n])
-            mouse.scroll(0, -2)
-            print("The current pointer position is {0}".format(mouse.position))
-            # mouse.press(Button.right)
-            # mouse.release(Button.right)
-            time.sleep(10)
+            mouse_move(mouse, ran_x, ran_y, sleep_time=15)
             if n != 3:
                 n = n + 1
             else:
@@ -49,18 +55,6 @@ while True:
         except KeyboardInterrupt:
             break
     else:
-        print('OoO Mode')
+        print("Have a rest, dude")
         time.sleep(100)
-print("End")
-
-
-# # Press and release
-# mouse.press(Button.left)
-# mouse.release(Button.left)
-
-# # Double click; this is different from pressing and releasing
-# # twice on Mac OSX
-# mouse.click(Button.left, 2)
-
-# # Scroll two steps down
-# mouse.scroll(0, 2)
+print("\nPLAY TO WIN!")
