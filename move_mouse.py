@@ -16,7 +16,7 @@ def mouse_move(mouse, ran_x, ran_y, *, sleep_time=10):
     """
     mouse.move(ran_x[n], ran_y[n])
     mouse.scroll(0, -2)
-    print("Mouse Moving at {}".format(datetime.now()))
+    print("{} 的时候挪了一下".format(datetime.now()))
     time.sleep(sleep_time)  # save some energy
 
 
@@ -39,11 +39,12 @@ def time_gap(start_time, end_time):
 
 
 # Read pointer position
-print("The current pointer position is {0}".format(mouse.position))
+print("鼠标现在的位置： {0}".format(mouse.position))
 # range of mouse movement
-ran_x = [0, 100, 0, -100]
-ran_y = [100, 0, -100, 0]
+ran_x = [0, 1, 0, -1]
+ran_y = [1, 0, -1, 0]
 n = 0
+alert_num = 1
 while True:
     if not time_gap("11:30", "12:50"):
         try:
@@ -55,6 +56,7 @@ while True:
         except KeyboardInterrupt:
             break
     else:
-        print("Have a rest, dude")
+        print("兄弟休息一下行吗 x{}".format(alert_num))
+        alert_num += 1
         time.sleep(100)
 print("\nPLAY TO WIN!")
