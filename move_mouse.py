@@ -15,7 +15,7 @@ def mouse_move(mouse, ran_x, ran_y, *, sleep_time=10):
         ran_y (list): y axis limitation
     """
     mouse.move(ran_x[n], ran_y[n])
-    mouse.scroll(0, -2)
+    # mouse.scroll(0, -2)
     print("{} 的时候挪了一下".format(datetime.now()))
     time.sleep(sleep_time)  # save some energy
 
@@ -46,7 +46,7 @@ ran_y = [1, 0, -1, 0]
 n = 0
 alert_num = 1
 while True:
-    if not time_gap("11:30", "12:50"):
+    if not time_gap("18:05", "24:00"):
         try:
             mouse_move(mouse, ran_x, ran_y, sleep_time=15)
             if n != 3:
