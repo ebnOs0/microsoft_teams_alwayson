@@ -46,7 +46,7 @@ ran_y = [1, 0, -1, 0]
 n = 0
 alert_num = 1
 while True:
-    if not time_gap("18:05", "24:00"):
+    if not time_gap("18:02", "23:59"):
         try:
             mouse_move(mouse, ran_x, ran_y, sleep_time=15)
             if n != 3:
