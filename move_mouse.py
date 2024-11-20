@@ -15,7 +15,7 @@ def mouse_move(mouse, ran_x, ran_y, *, sleep_time=10):
         ran_y (list): y axis limitation
     """
     mouse.move(ran_x[n], ran_y[n])
-    # mouse.scroll(0, -2)
+    # mouse.scroll(0, -2) # scroll is neccessary when using a Windows PC
     print("{} 的时候挪了一下".format(datetime.now()))
     time.sleep(sleep_time)  # save some energy
 
